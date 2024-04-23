@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userPro from "./user.png";
+import userPro from "./user.png"
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const curr = localStorage.getItem("user");
   const isLoggedIn = curr ? true : false;
+
   const ProfileLink = "../profile/" + curr;
 
   const handleDropdownToggle = () => {
@@ -28,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky h-2/12 top-0 z-50 bg-blue-100 flex justify-between items-center">
+    <div className="sticky h-2/12 top-0 z-50 bg-teal-100 flex justify-between items-center">
       <div className="pl-10">
         <a href="/home" className="text-2xl ">
           Mango
@@ -39,7 +40,7 @@ const Navbar = () => {
         <a className="mr-5 text-2xl " href="/home">
           Home
         </a>
-        <a className="ml-5 text-2xl mr-5">Premium</a>
+        <a className="ml-5 text-2xl mr-5 cursor-pointer ">Premium</a>
         {/* Dropdown for Services */}
         <div
           className="relative ml-5"

@@ -7,16 +7,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
-  const [editedFields, setEditedFields] = useState({
-    _id : '',
-    password : '',
-    username: "",
-    name: "",
-    email: "",
-    skills: [],
-    rating : 0,
-    project_ids : []
-  });
+  const [editedFields, setEditedFields] = useState({skills:[],project_id:[]});
   if(id != localStorage.getItem('user'))
   {
      alert('dont');
@@ -81,6 +72,7 @@ const Profile = () => {
    return (
      <>
        <Navbar />
+
        <div className="h-screen bg-gray-800 flex justify-center items-center">
          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-5/12">
            <h2 className="text-2xl mb-4 font-bold text-gray-800">Profile</h2>
@@ -189,19 +181,10 @@ const Profile = () => {
              >
                Project ID:
              </label>
-             {edit ? (
-               <input
-                 type="text"
-                 id="project_id"
-                 className="border-none bg-transparent py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-                 value={editedFields.project_id}
-                 onChange={handleFieldChange}
-               />
-             ) : (
-               <div className="border-none bg-transparent py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full">
-                 {editedFields.project_id}
-               </div>
-             )}
+
+             <div className="border-none bg-transparent py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full">
+                  editedFields.project_id.map((item,index) => <a>item</a>)
+             </div>
            </div>
 
            <hr className="mb-4" />

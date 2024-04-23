@@ -103,6 +103,7 @@ const Register = () => {
             className="rounded-md bg-gray-700 w-full p-2 text-white"
           />
         </div>
+       
         <div className="mb-4">
           <label htmlFor="Skills" className="block text-white mb-2">
             Skills (optional)
@@ -114,6 +115,7 @@ const Register = () => {
             className="rounded-md bg-gray-700 w-full p-2 text-white"
           />
         </div>
+
         <div className="flex justify-end">
           <button className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white" onClick={(e) => handleClick(e)}>
             Sign Up

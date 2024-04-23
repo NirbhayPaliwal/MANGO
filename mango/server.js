@@ -5,7 +5,7 @@ const app = express();
 const lancer=require('./Schema/lancer');
 const client = require("./Schema/client");
 const project = require("./Schema/project");
-const c = require("./Schema/client");
+const rated=require("./Schema/rated")
 
 app.listen(5000, function () {
   console.log("Listening on port 5000");
@@ -52,6 +52,7 @@ app.post('/login',async (req,res)=>{
                 res.send({
                     message : 'Login_lancer',
                     result,
+                    flag:2
                 })
             }
             else{
@@ -82,8 +83,8 @@ app.post("/signup", async (req, res) => {
         password : password,
         email : email,
         skills : skills,
-        rating :0
-
+        rating :0,
+        people:0
     })
 
     let t = client.findOne({ username }).then((result) => {
@@ -175,6 +176,7 @@ app.post("/update",(req,res)=>{
           email: email,
           skills: skills,
           rating: 0,
+          people:0,
         });
          user2.save();
          res.status(500).send({
@@ -192,13 +194,13 @@ app.post("/update",(req,res)=>{
 
 app.post("/developers/:id",(req,res)=>{
   let id2=req.params.id;
-  console.log(id2);
+  // console.log(id2);
   // lancer.find({skills:{$all:['a','b']}}).then((result)=>{
   //   console.log(result);
   // });
 
   lancer.find({ skills: id2 }).then((result) => {
-    console.log(result);
+    // console.log(result);
     if(result.length!=0)
     {
       res.send({
@@ -216,3 +218,5 @@ app.post("/developers/:id",(req,res)=>{
   });
   
 })
+
+

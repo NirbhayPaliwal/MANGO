@@ -6,11 +6,20 @@ import Profile from "./profile";
 import ShowProfile from "./showprofile";
 import Home from "./home";
 import Developers from "./Developers";
+import RegisterClient from "./RegisterClient"
+import ProfileClient from "./ProfileClient";
+import AssignProject from "./AssignProject";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/signup" element={<Register />}></Route>
+        <Route path="/assignproject" element={<AssignProject />}></Route>
+        <Route path="/signupclient" element={<RegisterClient />}></Route>
+        <Route path="/ProfileClient" element={<ProfileClient />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/myprofile/:id" element={<Profile />}></Route>
         <Route path="/profile/:id" element={<ShowProfile />}></Route>

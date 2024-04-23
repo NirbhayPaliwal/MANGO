@@ -7,7 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   let { id } = useParams();
-  console.log(id);  
+  console.log(id);
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -22,13 +22,14 @@ const Login = () => {
       });
 
       const data = await response.json();
-      if (!response.ok || data.flag==1) {
+      if (!response.ok || data.flag == 1) {
         alert(data.message);
-        navigate('/login');
+        navigate("/login");
       } else {
-        localStorage.setItem('user', data.result.username);
-        // console.log(localStorage.getItem('user'));    
-        const k = localStorage.getItem('user');
+        localStorage.setItem("user", data.result.username);
+        // console.log(localStorage.getItem('user'));
+        const k = localStorage.getItem("user");
+
         navigate("/home");
         alert(data.message);
       }
@@ -38,9 +39,12 @@ const Login = () => {
     }
   };
 
-  const handleClick2= async (e)=>{
-    navigate('/signup');
-  } ;
+  const handleClick2 = async (e) => {
+    navigate("/signup");
+  };
+  const handleClick3 = async (e) => {
+    navigate("/signupclient");
+  };
 
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-200 to-gray-300">
@@ -80,11 +84,18 @@ const Login = () => {
             Login
           </button>
         </div>
-        <div className="mt-8 flex justify-end">
-          <button className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          onClick={(e) => handleClick2(e)}
+        <div className="mt-8 flex justify-between">
+          <button
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={(e) => handleClick2(e)}
           >
-            Register
+            Freelancer Register
+          </button>
+          <button
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={(e) => handleClick3(e)}
+          >
+            Client Register
           </button>
         </div>
       </div>

@@ -26,6 +26,10 @@ const lancer = new Schema({
     type:Number,
     required:false,
   },
+  people:{
+    type:Number,
+    required:true,
+  },
   email:{
     type:String,
     required:true,

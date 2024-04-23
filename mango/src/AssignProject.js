@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const AssignProject = () => {
   const [data, setData] = useState({});
 
   const handleClick = () => {
-    // on submit
-
+        
   };
 
   const handleInput = (e) => {
@@ -76,7 +75,7 @@ const AssignProject = () => {
           <div className="mt-10 flex justify-end">
             <button
               className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded   focus:outline-none focus:shadow-outline"
-              // onClick={handleClick}
+              //  onClick={handleClick}
             >
               Assign Project
             </button>
