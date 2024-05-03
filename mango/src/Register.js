@@ -15,7 +15,7 @@ const Register = () => {
 
   const handleSkill = (e) => {
      const ski = e.target.value.split(',');
-     handleData({...Data,skills:ski});
+     handleData({...Data,[e.target.id]:ski});
   }
 
    const handleClick = async (e) => {
@@ -61,7 +61,7 @@ const Register = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
         <div className="mb-4">
@@ -74,7 +74,7 @@ const Register = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
         <div className="mb-4">
@@ -82,12 +82,12 @@ const Register = () => {
             Email *
           </label>
           <input
-            type="text"
+            type="email"
             id="email"
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md w-full p-2 bg-gray-300 text-black"
           />
         </div>
         <div className="mb-4">
@@ -100,10 +100,10 @@ const Register = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
-       
+
         <div className="mb-4">
           <label htmlFor="Skills" className="block text-white mb-2">
             Skills (optional)
@@ -112,19 +112,22 @@ const Register = () => {
             type="text"
             id="skills"
             onChange={handleSkill}
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
 
         <div className="flex justify-end">
-          <button className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white" onClick={(e) => handleClick(e)}>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white"
+            onClick={(e) => handleClick(e)}
+          >
             Sign Up
           </button>
         </div>
         <div className="text-center mt-4">
           <p className="text-white">
             Already have an account?{" "}
-            <a href="#" className="text-blue-500">
+            <a href="/login" className="text-blue-500">
               Log in
             </a>
           </p>

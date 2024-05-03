@@ -8,9 +8,9 @@ const Login = () => {
   const [formData, setFormData] = useState({});
   let { id } = useParams();
   console.log(id);
+  
   const handleClick = async (e) => {
     e.preventDefault();
-
     try {
       // console.log("hi");
       const response = await fetch("http://localhost:5000/login", {
@@ -22,11 +22,12 @@ const Login = () => {
       });
 
       const data = await response.json();
-      if (!response.ok || data.flag == 1) {
+      if (!response.ok || data.flag == 3 ) {
         alert(data.message);
         navigate("/login");
       } else {
         localStorage.setItem("user", data.result.username);
+        localStorage.setItem("flag", data.flag);
         // console.log(localStorage.getItem('user'));
         const k = localStorage.getItem("user");
 
@@ -49,7 +50,7 @@ const Login = () => {
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-200 to-gray-300">
       <div className="bg-black px-10 pt-20 rounded-lg shadow-lg w-3/12 h-4/6">
-        <h2 className="text-3xl font-bold text-white mb-6 mt-4">Login</h2>
+        <h2 className="text-3xl font-bold text-white mb-6 ">Login</h2>
         <div className="mb-4">
           <label htmlFor="username" className="block text-white mb-2">
             Username:
@@ -60,7 +61,7 @@ const Login = () => {
             onChange={(e) =>
               setFormData({ ...formData, [e.target.id]: e.target.value })
             }
-            className="w-full py-2 px-3 rounded-md bg-gray-800 text-white"
+            className="w-full py-2 px-3 rounded-md bg-gray-300 text-black"
           />
         </div>
         <div className="mb-6">
@@ -73,7 +74,7 @@ const Login = () => {
             onChange={(e) =>
               setFormData({ ...formData, [e.target.id]: e.target.value })
             }
-            className="w-full py-2 px-3 rounded-md bg-gray-800 text-white"
+            className="w-full py-2 px-3 rounded-md bg-gray-300 text-black"
           />
         </div>
         <div className="flex justify-center">
@@ -86,13 +87,13 @@ const Login = () => {
         </div>
         <div className="mt-8 flex justify-between">
           <button
-            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 rounded focus:outline-none focus:shadow-outline"
             onClick={(e) => handleClick2(e)}
           >
             Freelancer Register
           </button>
           <button
-            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2  rounded focus:outline-none focus:shadow-outline"
             onClick={(e) => handleClick3(e)}
           >
             Client Register

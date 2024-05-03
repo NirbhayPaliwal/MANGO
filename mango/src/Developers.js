@@ -7,7 +7,7 @@ const Developers = () => {
   const [items, setItems] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [rating2, setRating2] = useState(4);
+  const [rating2, setRating2] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +24,9 @@ const Developers = () => {
           navigate("/home");
         } else {
           setItems(data.result);
+         console.log(data.result); 
+          
+          console.log("hii");  
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -71,8 +74,15 @@ const Developers = () => {
                     <h5 className="card-title mb-1">{item.name}</h5>
                     <p className="card-text mb-2">
                       Rating:{" "}
-                      {[...Array(rating2)].map((_, index) => (
-                        <span key={index} className="text-warning">
+                      {[...Array(5)].map((_, index) => (
+                        <span
+                          key={index}
+                          className={`text-lg mr-1 cursor-pointer ${
+                            index < item.rating
+                              ? "text-yellow-500"
+                              : "text-gray-400"
+                          }`}
+                        >
                           ★
                         </span>
                       ))}

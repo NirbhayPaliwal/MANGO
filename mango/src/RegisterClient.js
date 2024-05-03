@@ -17,7 +17,7 @@ const RegisterClient = () => {
 
     try {
       console.log("hi");
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://localhost:5000/signupc", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,6 +30,7 @@ const RegisterClient = () => {
         alert(data.message);
         navigate("/login"); //navigate to login page
       } else {
+        navigate("../signupclient");
         alert(data.message);
       }
     } catch (error) {
@@ -37,6 +38,8 @@ const RegisterClient = () => {
       alert("Could not submit data");
     }
   };
+
+
 
   return (
     <div className="h-screen bg-white-900 flex justify-center items-center">
@@ -54,7 +57,7 @@ const RegisterClient = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
         <div className="mb-4">
@@ -67,7 +70,7 @@ const RegisterClient = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
         <div className="mb-4">
@@ -80,7 +83,7 @@ const RegisterClient = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
         <div className="mb-4">
@@ -93,10 +96,10 @@ const RegisterClient = () => {
             onChange={(e) =>
               handleData({ ...Data, [e.target.id]: e.target.value })
             }
-            className="rounded-md bg-gray-700 w-full p-2 text-white"
+            className="rounded-md  w-full p-2 bg-gray-300 text-black"
           />
         </div>
-       
+
         <div className="flex justify-end">
           <button
             className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white"
@@ -108,7 +111,7 @@ const RegisterClient = () => {
         <div className="text-center mt-4">
           <p className="text-white">
             Already have an account?{" "}
-            <a href="#" className="text-blue-500">
+            <a href="/login" className="text-blue-500">
               Log in
             </a>
           </p>

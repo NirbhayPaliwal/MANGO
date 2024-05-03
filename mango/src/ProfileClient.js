@@ -7,61 +7,69 @@ const ProfileClient = () => {
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
   const [editedFields, setEditedFields] = useState({});
-//   if (id != localStorage.getItem("user")) {
-//     alert("dont");
-//     navigate("404.html");
-//   }
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch(`http://localhost:5000/myprofile/${id}`, {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         });
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch user data");
-//         }
 
-//         const data = await response.json();
-//         setEditedFields(data.result);
-//       } catch (error) {
-//         console.error(error);
-//         alert("Could not fetch user data");
-//       }
-//     };
 
-//     fetchData();
-//   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/myprofile/${id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        const data = await response.json();
+        setEditedFields(data.result);
+        // editedFields.project_ids=data.result.project_ids;
+        // editedFields.skills=data.result.skills;
+
+        console.log(editedFields.project_ids);
+      } catch (error) {
+        console.error(error);
+        alert("Could not fetch user data");
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFieldChange = (e) => {
     const fieldName = e.target.id;
     const fieldValue = e.target.value;
     setEditedFields({ ...editedFields, [fieldName]: fieldValue });
   };
+
+   const handleId = (e) => {
+     navigate("../viewproject/" + e);
+   };
+
+
+    const handleClick = async (e) => {
+      e.preventDefault();
+
+      try {
+        const response = await fetch("http://localhost:5000/update", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedFields),
+        });
+        console.log("asdfdiuihgandfg");
+
+        const data = await response.json();
+        alert(data.message);
+      } catch (error) {
+        console.error(error);
+        alert("Could not submit data");
+      }
+    };
+
  
-
-//   const handleClick = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await fetch("http://localhost:5000/update", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(editedFields),
-//       });
-//       console.log("asdfdiuihgandfg");
-
-//       const data = await response.json();
-//       alert(data.message);
-//     } catch (error) {
-//       console.error(error);
-//       alert("Could not submit data");
-//     }
-//   };
 
   return (
     <>
@@ -131,7 +139,6 @@ const ProfileClient = () => {
           </div>
           <hr className="mb-4" />
 
-         
           <div className="mb-4 flex items-center">
             <label
               className="text-gray-700 text-sm font-bold mr-2"
@@ -139,18 +146,23 @@ const ProfileClient = () => {
             >
               Project ID:
             </label>
-            {edit ? (
-              <input
-                type="text"
-                id="project_id"
-                className="border-none bg-transparent py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-                value={editedFields.project_id}
-                onChange={handleFieldChange}
-              />
-            ) : (
-              <div className="border-none bg-transparent py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full">
-                {editedFields.project_id}
+            {editedFields.project_ids ? (
+              <div className="border-none bg-transparent leading-tight focus:outline-none focus:shadow-outline w-full">
+                {editedFields.project_ids.map((projectId, index) => (
+                  <span key={projectId}>
+                    <a
+                      id={`project_id_${index}`}
+                      className="border-none bg-transparent py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hover:text-1xl cursor-pointer"
+                      onClick={() => handleId(projectId)}
+                    >
+                      {projectId}
+                    </a>
+                    {index !== editedFields.project_ids.length - 1 && ", "}
+                  </span>
+                ))}
               </div>
+            ) : (
+              <span className="text-gray-700">No projects</span>
             )}
           </div>
 
@@ -161,7 +173,7 @@ const ProfileClient = () => {
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button"
-                // onClick={(e) => handleClick(e)}
+                onClick={(e) => handleClick(e)}
                 // Placeholder for saveChanges function
               >
                 Save Changes

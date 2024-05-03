@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userPro from "./user.png"
+import userPro from "./user.png";
+import proimage from "./pro.svg";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const curr = localStorage.getItem("user");
+  const whichUser = localStorage.getItem("flag");
+
   const isLoggedIn = curr ? true : false;
 
-  const ProfileLink = "../profile/" + curr;
+  let ProfileLink;
+  console.log(whichUser);  
+  if (whichUser !== "1") ProfileLink = "../profile/" + curr;
+  else ProfileLink = "../ProfileClient/" + curr;
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleServiceClick = (service) => {
-      navigate("../developers/"+service);
+    navigate("../developers/" + service);
     console.log("Selected service:", service);
   };
 
@@ -25,29 +31,40 @@ const Navbar = () => {
 
   const handleClicklogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("flag");
     navigate("../home");
   };
 
   return (
     <div className="sticky h-2/12 top-0 z-50 bg-teal-100 flex justify-between items-center">
       <div className="pl-10">
-        <a href="/home" className="text-2xl ">
-          Mango
+        {/* Adjusted img tag */}
+        <a href="/home">
+          <img
+            src={proimage}
+            className="w-40 h-40 cursor-pointer "
+            alt="Logo"
+          />
         </a>
       </div>
 
       <div className="flex mr-3">
-        <a className="mr-5 text-2xl " href="/home">
+        <a
+          className="mr-5 text-2xl text-gray-800 hover:text-blue-600"
+          href="/home"
+        >
           Home
         </a>
-        <a className="ml-5 text-2xl mr-5 cursor-pointer ">Premium</a>
+        {/* <a className="ml-5 text-2xl mr-5 cursor-pointer text-gray-800 hover:text-blue-600">
+          Premium
+        </a> */}
         {/* Dropdown for Services */}
         <div
           className="relative ml-5"
           onMouseEnter={handleDropdownToggle}
           onMouseLeave={handleDropdownToggle}
         >
-          <div className="text-2xl cursor-pointer outline-none focus:outline-none">
+          <div className="text-2xl cursor-pointer outline-none focus:outline-none hover:text-blue-600">
             Services
           </div>
           {isDropdownOpen && (
