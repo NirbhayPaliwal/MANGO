@@ -24,6 +24,7 @@ const client = new Schema({
   }
 }, { timestamps: true });
 client.pre("save", async function (next) {
+  if(this.password.length>20)next();
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
   next();

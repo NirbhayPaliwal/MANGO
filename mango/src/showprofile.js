@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import ChatIcon from "./ChatIcon"
 import useAuth from "./useauth";
 const ShowProfile = () => {
   const { curr, whichUser, loading, setCurr, setWhichUser } = useAuth();
@@ -169,7 +170,7 @@ const ShowProfile = () => {
             )}
           </div>
           <hr className="mb-4" />
-          
+
           {/* Rating */}
           <div className="flex items-center mb-4">
             <label
@@ -223,6 +224,7 @@ const ShowProfile = () => {
           <hr className="mb-4" />
         </div>
       </div>
+      <ChatIcon />
     </>
   );
 };
