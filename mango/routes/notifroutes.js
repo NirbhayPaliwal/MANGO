@@ -7,8 +7,8 @@ const accepted = require("../Schema/accepted");
 const project = require("../Schema/project");
 router.post("/accept" ,async (req,res)=>{
 //    let id = res.body.id;
-    let p = await project.findOneAndDelete({id : req.body.id});
-    // console.log(p);
+    let p = await project.findOneAndDelete({_id : req.body.data.id});
+    if(!p) return res.send({});
     let newproject = await new accepted({
         lancer_id : p.lancer_id,
         name : p.name,
@@ -32,5 +32,9 @@ router.post('/fetchproject',async(req,res)=>{
     const response = await project.find({lancer_id : req.body.id});
     res.send({response});
     
+})
+router.post('/reject',async(req,res)=>{
+    const p= await project.findOneAndDelete({_id : req.body.data.id});
+    return ;
 })
 module.exports = router;

@@ -21,7 +21,7 @@ const ViewProject = () => {
           alert(responseData.message);
           navigate("/home");
         } else {
-                  console.log(responseData.year);
+          console.log(responseData.result)
           setD(responseData);
           setData(responseData.result);
         }

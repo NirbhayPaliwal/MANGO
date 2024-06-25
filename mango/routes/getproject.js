@@ -11,8 +11,9 @@ router.post("/getproject/:id", async (req, res) => {
           const year = result.date.getFullYear();
           const month = result.date.getMonth();
           const day = result.date.getDay();
-          return res.send(
+          return res.send({
             result ,day,month,year
+          }
           );
     }
     result = await accepted.findOne({ _id: project_id });

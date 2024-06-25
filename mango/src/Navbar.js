@@ -72,11 +72,7 @@ const Navbar = () => {
     }
   };
 
-  const [notifications, setNotifications] = useState([
-    { _id: "1", name: "Project d", currentCode: "Pending" },
-    { _id: "2", name: "Project a", currentCode: "Accepted" },
-    { _id: "3", name: "Project G", currentCode: "Pending" },
-  ]);
+  const [notifications, setNotifications] = useState([]);
   const handleNotificationsDropdownToggle = () => {
     if(isNotificationsDropdownOpen==0)fetchNotifications();
     setIsNotificationsDropdownOpen(!isNotificationsDropdownOpen);
@@ -87,16 +83,19 @@ const Navbar = () => {
   };
 
   const handleAccept = async (id) => {
-    console.log(`Accepted project with id: ${id}`);
-    const data = {username : curr , id}
+    console.log(`Accepted project with id: ${id}`);    
     try{
+
+        handleNotificationsDropdownToggle();
+        const data = { username: curr, id };
         const response = await fetch("http://localhost:5000/accept", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({data}), //send syntax
-      });
+      });      
+      fetchNotifications();
     }
     catch(err)
     {
@@ -106,8 +105,23 @@ const Navbar = () => {
     // sendNotificationToClient(id, "accept");
     // transfer this project from pending to accepted category ......
   };
-  const handleReject = (id) => {
+  const handleReject = async (id) => {
     console.log(`Rejected project with id: ${id}`);
+    try{
+        handleNotificationsDropdownToggle();
+        const data = { username: curr, id };
+        const response = await fetch("http://localhost:5000/reject", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({data}), //send syntax
+      });
+    }catch(err)
+    {
+      console.log(err);
+    }
+        
     // Send reject notification to client
 
     //sendNotificationToClient(id, "reject");
@@ -174,7 +188,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-6">
-        {isLoggedIn && (
+        {isLoggedIn && whichUser == 2 && (
   <div className="relative">
     <img 
       src={bell} 
